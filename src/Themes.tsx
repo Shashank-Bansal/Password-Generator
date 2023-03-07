@@ -7,9 +7,6 @@ import { createTheme } from "@mui/material";
 //     }
 // }
 
-import { red, green, blue } from '@mui/material/colors';
-
-
 let theme = createTheme()
 theme = createTheme(theme, {
     // cardStyle: {
@@ -82,22 +79,17 @@ theme = createTheme(theme, {
                     background: 'linear-gradient(to right bottom, #2ee2d6 , #f2fca6)',
                     [theme.breakpoints.only('xs')]: { // 0
                         width: '350px',
-                        backgroundColor: red[500],
                     },
                     [theme.breakpoints.only('sm')]: { // 600
-                        backgroundColor: blue[500],
                         width: '420px'
                     },
                     [theme.breakpoints.only('md')]: { // 900
-                        backgroundColor: red[500],
                         width: '480px'
                     },
                     [theme.breakpoints.only('lg')]: { // 1200
-                        backgroundColor: blue[500],
                         width: '520px'
                     },
                     [theme.breakpoints.only('xl')]: { // 1536
-                        backgroundColor: green[500],
                         width: '520px'
                     },
                 },
