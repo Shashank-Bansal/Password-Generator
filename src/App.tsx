@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import MainBody from './Components/MainBody'
+import { Grid, ThemeProvider } from '@mui/material'
+import { theme } from './Themes';
+import { Provider } from 'react-redux';
+import stateStore from './Components/ReduxToolkit/store';
+// import AppProvider from './Components/ContextApi/Context';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ThemeProvider theme={theme}>
+      <Provider store={stateStore}>
+        {/* <AppProvider> */}
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ minHeight: '100vh', width: '100vw' }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <MainBody />
+        </Grid>
+        {/* </AppProvider> */}
+      </Provider>
+    </ThemeProvider>
   );
 }
 
