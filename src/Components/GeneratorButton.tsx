@@ -46,13 +46,13 @@ const GeneratorButton: React.FC = () => {
     function checkAndGenerate() {
         if (con.state.length < con.state.min) {
             // alert("Password length should be greater than 5");
-            alertController('alert', 'e', "Password length should be greater than 5", "Error", true);
+            alertController('alert', 'e', `Password length should be greater than or equal than ${con.state.min}`, "Error", true);
             return;
         }
 
         if (con.state.length > con.state.max) {
             // alert("Password length should not exceed 30");
-            alertController('alert', 'e', "Password length should not exceed 30", "Error", true);
+            alertController('alert', 'e', `Password length should not exceed ${con.state.max}`, "Error", true);
             return;
         }
 
@@ -82,7 +82,6 @@ const GeneratorButton: React.FC = () => {
                 try {
                     const response = await axios.get(url);
                     // console.log(response);
-                    // response.then {}
                     const s = response.data.password as string;
                     // console.log(s);
                     // con.dispatch({

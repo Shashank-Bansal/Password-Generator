@@ -58,6 +58,12 @@ theme = createTheme(theme, {
                     [theme.breakpoints.only('xl')]: { // 1536
                         fontSize: '42px'
                     },
+                },
+
+                body1: {
+                    [theme.breakpoints.only('xs')]: { // 0
+                        fontSize: '14px'
+                    },
                 }
             },
         },
@@ -110,6 +116,14 @@ theme = createTheme(theme, {
                 },
             },
         },
+
+        // MuiChip: {
+        //     styleOverride: {
+        //         label: {
+        //             fontSize: '19px',
+        //         }
+        //     },
+        // },
     },
 });
 

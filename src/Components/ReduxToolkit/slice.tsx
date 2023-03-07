@@ -14,7 +14,7 @@ const initialstate = {
     number: false,
     symbol: false,
     length: 16,
-    min: 6,
+    min: 4,
     max: 30,
     password: "",
     api: false,

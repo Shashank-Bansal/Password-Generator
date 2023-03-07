@@ -4,14 +4,17 @@ import Fade from '@mui/material/Fade';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { useSelector } from "react-redux";
+import BackspaceIcon from '@mui/icons-material/Backspace';
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./ReduxToolkit/store";
+import { password } from "./ReduxToolkit/slice";
 // import { useContext, useState } from "react";
 // import { AppContext } from "./ContextApi/Context";
 
 const DisplayPassword: React.FC = () => {
     // const con = useContext(AppContext);
     const con = useSelector((state: RootState) => state);
+    const dispatch = useDispatch();
     const [state, setState] = useState(true);
     return (
         <TextField
@@ -46,6 +49,18 @@ const DisplayPassword: React.FC = () => {
                                 <ContentCopyIcon />
                             </IconButton>
                         </Tooltip>
+                        <Tooltip 
+                            title='Clear' 
+                            TransitionComponent={Fade}
+                            TransitionProps={{ timeout: 800 }}
+                            enterDelay={500} 
+                            leaveDelay={200}
+                            arrow>
+                            <IconButton onClick={() => dispatch(password({password:""}))}>
+                                <BackspaceIcon />
+                            </IconButton>
+                        </Tooltip>
+                        
                     </InputAdornment>
                 ),
             }}

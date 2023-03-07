@@ -18,6 +18,7 @@ import { RootState } from './ReduxToolkit/store';
 const StyledFormControlLabel = styled(FormControlLabel)(() => ({
     display: "flex",
     justifyContent: "space-between",  
+    paddingRight: "2%",
 }));
 
 const StyledTypography = styled(Typography)(({theme}) => ({
@@ -32,10 +33,10 @@ const StyledTypography = styled(Typography)(({theme}) => ({
         width: '440%'
     },
     [theme.breakpoints.only('lg')]: { // 1200
-        width: '470%'
+        width: '500%'
     },
     [theme.breakpoints.only('xl')]: { // 1536
-        width: '470%'
+        width: '500%'
     },
 }));
 
@@ -48,7 +49,6 @@ const List: React.FC = () => {
     // const data = useSelector((state: any) => state.store);
 
     // const classes = useStyles();
-    console.log("re rendering");
 
     function debounce(t: number = 300) {
         let timer: any;
@@ -56,11 +56,11 @@ const List: React.FC = () => {
             clearTimeout(timer);
             timer = setTimeout(() => {
                 if (con.state.max < con.state.length) {
-                    alertController('alert', 'w', "Password length should not exceed 30", "Warning");
+                    alertController('alert', 'w', `Password length should not exceed ${con.state.max}`, "Warning");
                     return;
                 }
                 if (con.state.min > con.state.length) {
-                    alertController('alert', 'w', "Password length should be greater than 5", "Warning");
+                    alertController('alert', 'w', `Password length should be greater than or equal than ${con.state.min}`, "Warning");
                     return;
                 }
 
@@ -114,12 +114,12 @@ const List: React.FC = () => {
             type: "lowercase",
         },
         {
-            label: 'Inclue Numbers',
+            label: 'Include Numbers',
             checked: con.state.number,
             type: "numeric",
         },
         {
-            label: 'Inclue Symbols',
+            label: 'Include Symbols',
             checked: con.state.symbol,
             type: "symbol",
         },
@@ -161,18 +161,19 @@ const List: React.FC = () => {
                 <TextField
                     type="number"
                     size='small'
-                    fullWidth
                     value={con.state.length}
                     InputProps={{
                         inputProps: {
-                            max: con.state.max, min: con.state.min
+                            max: con.state.max, 
+                            min: con.state.min
                         },
                         startAdornment: <StyledTypography variant="body1">Password Length</StyledTypography>
-                        // startAdornment: <Typography variant="body1" sx={{ width: "300%" }}>Password Length</Typography>
                     }}
+                    fullWidth
                     required
                     error={(con.state.length !== undefined || con.state.length != null) && ((con.state.max < con.state.length) || (con.state.min > con.state.length))}
-                    helperText={(con.state.max < con.state.length ? "Password length should not exceed 30" : (con.state.min > con.state.length ? "Password length should be greater than 5" : ""))}
+                    helperText={(con.state.max < con.state.length ? `Password length should not exceed ${con.state.max}`: (con.state.min > con.state.length ? `Password length should be greater than or equal than ${con.state.min}` : `The password must be between ${con.state.min} and ${con.state.max} characters in length` ))}
+                    onKeyUp={debounce(1000)}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                         // const v = (e.target as HTMLTextAreaElement).value;
                         // if (con.state.max < ((e.target as HTMLTextAreaElement).value as unknown as number)) {
@@ -193,7 +194,6 @@ const List: React.FC = () => {
                         // const v = (e.target as HTMLTextAreaElement).value;
                         dispatch(length({value: (e.target as HTMLTextAreaElement).value}));
                     }}
-                    onKeyUp={debounce(1000)}
                 />
 
                 <Slider
@@ -201,7 +201,6 @@ const List: React.FC = () => {
                     value={(con.state.length < con.state.min) ? con.state.min : (con.state.length > con.state.max) ? con.state.max : con.state.length}
                     min={con.state.min}
                     max={con.state.max}
-                    // sx={{width: '94%', marginLeft: '3%', marginBottom: "7px"}}
                     onChange={(e, v) => {
                         // con.dispatch({
                         //     type: 'length',
