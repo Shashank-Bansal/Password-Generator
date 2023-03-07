@@ -93,7 +93,7 @@ const GeneratorButton: React.FC = () => {
                     dispatch(password({password: s}));
                 }
                 catch (e) {
-                    alert("Api not working right now. Please generate password without API.")
+                    // alert("Api not working right now. Please generate password without API.")
                     alertController('alert', 'e', "Api not working right now. Please generate password without API.", "Error", true);
                 }
             }

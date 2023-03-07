@@ -72,6 +72,21 @@ theme = createTheme(theme, {
             }
         },
 
+        MuiTooltip: {
+            styleOverrides: {
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    color: 'white',
+                    fontFamily: 'Poppins',
+                    letterSpacing: '0.5px',
+                },
+
+                arrow: {
+                    color: 'rgba(0, 0, 0, 0.8)',
+                }
+            },
+        },
+
         MuiCard: {
             styleOverrides: {
                 root: {

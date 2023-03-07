@@ -17,10 +17,11 @@ import { RootState } from './ReduxToolkit/store';
 
 const StyledFormControlLabel = styled(FormControlLabel)(() => ({
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "space-between",  
 }));
 
 const StyledTypography = styled(Typography)(({theme}) => ({
+    fontFamily: 'Poppins',
     [theme.breakpoints.only('xs')]: { // 0
         width: '250%',
     },
@@ -192,7 +193,7 @@ const List: React.FC = () => {
                         // const v = (e.target as HTMLTextAreaElement).value;
                         dispatch(length({value: (e.target as HTMLTextAreaElement).value}));
                     }}
-                    onKeyUp={debounce()}
+                    onKeyUp={debounce(1000)}
                 />
 
                 <Slider
