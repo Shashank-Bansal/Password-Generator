@@ -86,10 +86,11 @@ theme = createTheme(theme, {
                     fontFamily: 'Poppins',
                     letterSpacing: '0.5px',
                 },
-
+                
                 arrow: {
                     color: 'rgba(0, 0, 0, 0.8)',
                 }
+
             },
         },
 
@@ -116,14 +117,6 @@ theme = createTheme(theme, {
                 },
             },
         },
-
-        // MuiChip: {
-        //     styleOverride: {
-        //         label: {
-        //             fontSize: '19px',
-        //         }
-        //     },
-        // },
     },
 });
 

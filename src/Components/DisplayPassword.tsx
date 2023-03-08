@@ -1,4 +1,4 @@
-import { HtmlHTMLAttributes, useState } from "react";
+import { useState } from "react";
 import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
 import Fade from '@mui/material/Fade';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -42,7 +42,7 @@ const DisplayPassword: React.FC = () => {
                             </IconButton>
                         </Tooltip>
                         <Tooltip 
-                            title={click1 ? 'Copied' : 'Copy'} 
+                            title={click1 && con.state.password !== '' ? 'Copied' : 'Copy'} 
                             TransitionComponent={Fade}
                             TransitionProps={{ timeout: 800 }}
                             enterDelay={500} 
