@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { HtmlHTMLAttributes, useState } from "react";
 import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
 import Fade from '@mui/material/Fade';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -16,6 +16,8 @@ const DisplayPassword: React.FC = () => {
     const con = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
     const [state, setState] = useState(true);
+    const [click1, setClick1] = useState(false);
+    const [click2, setClick2] = useState(false);
     return (
         <TextField
             variant="filled"
@@ -23,6 +25,7 @@ const DisplayPassword: React.FC = () => {
             label="Password"
             helperText={!con.state.password ? '' : 'Do not share your password with anyone'}
             type={state ? "password" : "text"}
+            multiline={state ? false : true}
             InputProps={{
                 readOnly: true,
                 endAdornment: (
@@ -39,24 +42,40 @@ const DisplayPassword: React.FC = () => {
                             </IconButton>
                         </Tooltip>
                         <Tooltip 
-                            title='Copy' 
+                            title={click1 ? 'Copied' : 'Copy'} 
                             TransitionComponent={Fade}
                             TransitionProps={{ timeout: 800 }}
                             enterDelay={500} 
                             leaveDelay={200}
-                            arrow>
-                            <IconButton onClick={() => navigator.clipboard.writeText(con.state.password)}>
+                            arrow
+                            // onOpen={() => setClick1(false)}
+                            onClose={() => setTimeout(() => setClick1(false), 800)}
+                        >
+                            <IconButton 
+                                onClick={() => {
+                                    navigator.clipboard.writeText(con.state.password);
+                                    setClick1(true);
+                                }}
+                            >
                                 <ContentCopyIcon />
                             </IconButton>
                         </Tooltip>
                         <Tooltip 
-                            title='Clear' 
+                            title={click2 ? 'Cleared' : 'Clear'}
                             TransitionComponent={Fade}
                             TransitionProps={{ timeout: 800 }}
                             enterDelay={500} 
                             leaveDelay={200}
-                            arrow>
-                            <IconButton onClick={() => dispatch(password({password:""}))}>
+                            arrow
+                            // onOpen={() => setClick2(false)}
+                            onClose={() => setTimeout(() => setClick2(false), 800)}
+                        >
+                            <IconButton 
+                                onClick={() => {
+                                    dispatch(password({password:""}));
+                                    setClick2(true);
+                                }}
+                            >
                                 <BackspaceIcon />
                             </IconButton>
                         </Tooltip>
