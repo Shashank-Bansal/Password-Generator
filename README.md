@@ -2,6 +2,12 @@
 
 https://shashank-bansal.github.io/Password-Generator/
 
+I developed a password generator application using ReactJS with TypeScript, React Hooks, Material UI, and styled components. The application enables users to specify their desired password length and select from various options, including uppercase and lowercase letters, digits, and special characters. The application offers the option to use either an API or an algorithm created by myself to generate the password.
+
+Furthermore, the application provides two more options for password generation. The first option is a random password generator that randomly selects the options and length needed to create a password. The second option is a strong password generator that uses all options and a long fixed length to create a highly secure password.
+
+To manage the application's state, I used Redux Toolkit and Axios for fetching data from the API. Additionally, I created a custom theme for Material UI to enhance the application's visual appeal and provide a cohesive design.
+
 # Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
