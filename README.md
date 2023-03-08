@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Password Generator App
+
+https://shashank-bansal.github.io/Password-Generator/
+
+# Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
