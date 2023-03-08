@@ -1,16 +1,16 @@
 import Button from "@mui/material/Button";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Generate from "./Generate";
-import { alert, alertOff, alertreset, password } from "./ReduxToolkit/slice";
+import { alert, alertOff, alertreset, fetchData, password } from "./ReduxToolkit/slice";
 import { RootState } from "./ReduxToolkit/store";
+// import axios from "axios";
 // import { useContext } from "react";
 // import { AppContext } from "./ContextApi/Context";
 
 const GeneratorButton: React.FC = () => {
     // const con = useContext(AppContext);
     const con = useSelector((state: RootState) => state);
-    const dispatch = useDispatch();
+    const dispatch: any = useDispatch();
 
     function alertController(
         type: string,
@@ -32,7 +32,7 @@ const GeneratorButton: React.FC = () => {
             message: message,
             title: title,
         }));
-        
+
         setTimeout(() => {
             // con.dispatch({
             //     type: 'alertOff',
@@ -65,36 +65,40 @@ const GeneratorButton: React.FC = () => {
         // con.dispatch({
         //     type: 'alertreset',
         // })
-        
+
         dispatch(alertreset());
 
         if (con.state.api) {
-            let url = `https://www.psswrd.net/api/v1/password/?length=${con.state.length}&lower=`;
-            url += con.state.lower ? '1' : '0';
-            url += '&upper='
-            url += con.state.upper ? '1' : '0';
-            url += '&int='
-            url += con.state.number ? '1' : '0';
-            url += '&special='
-            url += con.state.symbol ? '1' : '0'
+            // let url = `https://www.psswrd.net/api/v1/password/?length=${con.state.length}&lower=`;
+            // url += con.state.lower ? '1' : '0';
+            // url += '&upper='
+            // url += con.state.upper ? '1' : '0';
+            // url += '&int='
+            // url += con.state.number ? '1' : '0';
+            // url += '&special='
+            // url += con.state.symbol ? '1' : '0'
+            const url = `https://www.psswrd.net/api/v1/password/?length=${con.state.length}&lower=${Number(con.state.lower)}&upper=${Number(con.state.upper)}&int=${Number(con.state.number)}&special=${Number(con.state.symbol)}`;
 
             const fetchApi = async () => {
-                try {
-                    const response = await axios.get(url);
-                    // console.log(response);
-                    const s = response.data.password as string;
-                    // console.log(s);
-                    // con.dispatch({
-                    //     type: "password",
-                    //     password: s,
-                    // })
+                // try {
+                //     // const response = await axios.get(url);
+                //     // const s = response.data.password as string;
+                //     // console.log(s);
+                //     // con.dispatch({
+                //     //     type: "password",
+                //     //     password: s,
+                //     // })
+                //     // dispatch(password({password: s}));
+                // }
+                // catch (e) {
+                //     // alert("Api not working right now. Please generate password without API.")
+                //     // alertController('alert', 'e', "Api not working right now. Please generate password without API.", "Error", true);
+                // }
 
-                    dispatch(password({password: s}));
-                }
-                catch (e) {
-                    // alert("Api not working right now. Please generate password without API.")
-                    alertController('alert', 'e', "Api not working right now. Please generate password without API.", "Error", true);
-                }
+                await dispatch(fetchData(url));
+                setTimeout(() => {
+                    dispatch(alertOff());
+                }, 4000)
             }
             fetchApi();
 

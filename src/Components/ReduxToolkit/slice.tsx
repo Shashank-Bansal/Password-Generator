@@ -1,6 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const initialAlert = {
+type alertType = {
+    type: string,
+    title: string,
+    message: string,
+    show: boolean,
+    display: boolean,
+};
+
+type stateType = {
+    upper: boolean;
+    lower: boolean;
+    number: boolean;
+    symbol: boolean;
+    length: number;
+    min: number,
+    max: number,
+    password: string,
+    api: boolean,
+    alert: alertType,
+};
+
+const initialAlert: alertType = {
     type: "",
     title: "",
     message: "",
@@ -8,7 +30,7 @@ const initialAlert = {
     display: false,
 }
 
-const initialstate = {
+const initialstate: stateType = {
     upper: true,
     lower: false,
     number: false,
@@ -21,27 +43,14 @@ const initialstate = {
     alert: initialAlert,
 };
 
-// type stateType = {
-//     upper: boolean;
-//     lower: boolean;
-//     number: boolean;
-//     symbol: boolean;
-//     length: number;
-//     min: number,
-//     max: number,
-//     password: string,
-//     api: boolean,
-//     alert: {
-//         type: string,
-//         title: string,
-//         message: string,
-//         show: boolean,
-//         display: boolean,
-//     }
-// };
+export const fetchData = createAsyncThunk("fetchingPassword", async (url: string) => {
+    const response = await axios.get(url);
+    const password = await response.data.password;
+    return password;
+});
 
 const stateSlice = createSlice({
-    name: 'state',
+    name: 'data',
     initialState: initialstate,
     reducers: {
         uppercase(state) {
@@ -122,6 +131,30 @@ const stateSlice = createSlice({
                 alert: initialAlert,
             }
         },
+    },
+    extraReducers: builder => {
+        builder
+            .addCase(fetchData.pending, () => {
+
+            })
+            .addCase(fetchData.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    password: action.payload
+                };
+            })
+            .addCase(fetchData.rejected, (state) => {
+                return {
+                    ...state,
+                    alert: {
+                        type: 'e',
+                        message: "Api not working right now. Please generate password without API",
+                        title: "Error",
+                        show: true,
+                        display: true,
+                    },
+                }
+            });
     },
 })
 
