@@ -172,7 +172,7 @@ const List: React.FC = () => {
                     fullWidth
                     required
                     error={(con.state.length !== undefined || con.state.length != null) && ((con.state.max < con.state.length) || (con.state.min > con.state.length))}
-                    helperText={(con.state.max < con.state.length ? `Password length should not exceed ${con.state.max}`: (con.state.min > con.state.length ? `Password length should be greater than or equal than ${con.state.min}` : `The password must be between ${con.state.min} and ${con.state.max} characters in length` ))}
+                    helperText={(con.state.max < con.state.length ? `Password length should not exceed ${con.state.max}`: (con.state.min > con.state.length ? `Password length should be greater than or equal to ${con.state.min}` : `The password length must be between ${con.state.min} and ${con.state.max} characters in length` ))}
                     onKeyUp={debounce(1000)}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                         // const v = (e.target as HTMLTextAreaElement).value;

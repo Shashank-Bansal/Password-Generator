@@ -46,7 +46,7 @@ const GeneratorButton: React.FC = () => {
     function checkAndGenerate() {
         if (con.state.length < con.state.min) {
             // alert("Password length should be greater than 5");
-            alertController('alert', 'e', `Password length should be greater than or equal than ${con.state.min}`, "Error", true);
+            alertController('alert', 'e', `Password length should be greater than or equal to ${con.state.min}`, "Error", true);
             return;
         }
 
